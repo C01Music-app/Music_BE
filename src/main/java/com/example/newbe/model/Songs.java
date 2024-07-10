@@ -23,9 +23,8 @@ public class Songs {
     private String imgSongs;
 
     private String title;
-    @ManyToOne
-    @JoinColumn(name="artist_id" ,referencedColumnName="id")
-    private Artists artist;
+    @ManyToMany(mappedBy = "songs")
+    private Set<Artists> artist;
 
     private String description;
     private String time;
