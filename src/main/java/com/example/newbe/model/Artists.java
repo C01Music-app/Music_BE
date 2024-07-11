@@ -22,13 +22,6 @@ public class Artists {
     @Column(columnDefinition = "text")
     private String img;
     private String info;
-    @ManyToMany
-    @JoinTable(
-            name = "artist_songs",
-            joinColumns = @JoinColumn(name = "artist_id"),
-            inverseJoinColumns = @JoinColumn(name = "songs_id")
-    )
-    private Set<Songs> songs;
 
 //    @ManyToOne
 //    @JoinColumn(name = "album_id", referencedColumnName = "id")

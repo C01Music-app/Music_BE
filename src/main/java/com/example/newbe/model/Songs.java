@@ -23,7 +23,7 @@ public class Songs {
     private String imgSongs;
 
     private String title;
-    @ManyToMany(mappedBy = "songs")
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Artists> artist;
 
     private String description;
