@@ -3,9 +3,6 @@ package com.example.newbe.controller;
 import com.example.newbe.model.Playlists;
 import com.example.newbe.service.playlistsService.IPlaylistsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +33,7 @@ public class PlaylistsController {
     }
 
     // Lấy danh sách phát theo ID
-    @GetMapping("/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<Playlists> getPlaylistById(@PathVariable Integer id) {
         Optional<Playlists> playlist = playlistsService.getPlaylistById(id);
         if (playlist.isPresent()) {
@@ -58,11 +55,26 @@ public class PlaylistsController {
         }
     }
 
+    // Tìm kiếm danh sách phát theo tên
     @GetMapping("/search")
     public ResponseEntity<List<Playlists>> searchPlayListByName(@RequestParam String name) {
         List<Playlists> playlists = playlistsService.findPlayListByName(name);
         return new ResponseEntity<>(playlists, HttpStatus.OK);
     }
+
+    // Chỉnh sửa danh sách phát theo ID
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<Playlists> editPlaylist(@PathVariable Integer id, @RequestBody Playlists playlistDetails) {
+        Optional<Playlists> optionalPlaylist = playlistsService.getPlaylistById(id);
+        if (optionalPlaylist.isPresent()) {
+            Playlists playlist = optionalPlaylist.get();
+            playlist.setTitle(playlistDetails.getTitle());
+            // Cập nhật các trường thông tin khác của playlist nếu cần thiết
+
+            Playlists updatedPlaylist = playlistsService.savePlaylist(playlist);
+            return new ResponseEntity<>(updatedPlaylist, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
-
-
