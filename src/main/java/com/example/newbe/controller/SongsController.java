@@ -1,18 +1,15 @@
 package com.example.newbe.controller;
 
 import com.example.newbe.model.Artists;
-import com.example.newbe.model.Playlists;
 import com.example.newbe.model.Songs;
 import com.example.newbe.service.ISongsService;
 import com.example.newbe.service.aristsService.IArtistsService;
-import com.example.newbe.service.playlistsService.IPlaylistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -23,8 +20,7 @@ public class SongsController {
     @Autowired
     private IArtistsService artistsService;
 
-    @Autowired
-    private IPlaylistsService playlistsService;
+
 
 
 //    @GetMapping("")
@@ -88,7 +84,6 @@ public class SongsController {
         if (existingSongs == null) {
             return new ResponseEntity<>("Song not found with id: " + id, HttpStatus.NOT_FOUND);
         }
-
         // Update fields from updatedSongs to existingSongs
         existingSongs.setTitle(updatedSongs.getTitle());
         existingSongs.setArtist(updatedSongs.getArtist());
@@ -116,5 +111,4 @@ public class SongsController {
             return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
     }
-
 }
