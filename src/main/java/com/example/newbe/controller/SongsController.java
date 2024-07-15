@@ -43,7 +43,9 @@ public class SongsController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createSongs(@RequestBody Songs songs) {
+        System.out.println(songs);
         iSongsService.save(songs);
+        System.out.println("ok");
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
