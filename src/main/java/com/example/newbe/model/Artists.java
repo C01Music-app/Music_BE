@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,9 +22,7 @@ public class Artists {
     @Column(columnDefinition = "text")
     private String img;
     private String info;
-    @ManyToOne
-    @JoinColumn(name = "songs_id")
-    private Songs songs;
+
 //    @ManyToOne
 //    @JoinColumn(name = "album_id", referencedColumnName = "id")
 //    private Album album;

@@ -1,16 +1,14 @@
 package com.example.newbe.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,9 +21,8 @@ public class Songs {
     private String imgSongs;
 
     private String title;
-    @ManyToOne
-    @JoinColumn(name="artist_id" ,referencedColumnName="id")
-    private Artists artist;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Artists> artist;
 
     private String description;
     private String time;
@@ -40,4 +37,7 @@ public class Songs {
 
     @ManyToMany(mappedBy = "songs")
     private Set<Playlists> playlists;
+
+
+
 }

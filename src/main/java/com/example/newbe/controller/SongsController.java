@@ -1,7 +1,9 @@
 package com.example.newbe.controller;
 
+import com.example.newbe.model.Artists;
 import com.example.newbe.model.Songs;
 import com.example.newbe.service.ISongsService;
+import com.example.newbe.service.aristsService.IArtistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import java.util.List;
 public class SongsController {
     @Autowired
     private ISongsService iSongsService;
+    @Autowired
+    private IArtistsService artistsService;
 
 //    @GetMapping("")
 //    public ResponseEntity<?> showSongs(@RequestParam(defaultValue = "0") int page,
@@ -26,16 +30,22 @@ public class SongsController {
 //    }
 
 
+
+
     @GetMapping("")
     public ResponseEntity<?> AllSongs() {
+        List<Artists> artists = artistsService.getAllArtists();
         List<Songs> songs = iSongsService.findAll();
+
         System.out.println(songs);
         return new ResponseEntity<>(songs, HttpStatus.OK);
     }
 
     @PostMapping("/create")
     public ResponseEntity<?> createSongs(@RequestBody Songs songs) {
+        System.out.println(songs);
         iSongsService.save(songs);
+        System.out.println("ok");
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
