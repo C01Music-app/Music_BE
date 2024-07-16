@@ -57,6 +57,13 @@ public class SongsService implements ISongsService {
         return iSongsRepository.findAllSongs();
     }
 
+
+    @Override
+    public void updateS(Songs songs) {
+        iSongsRepository.save(songs);
+    }
+
+
     @Transactional
     @Override
     public void removePlaylistFromSong(Integer songId, Integer playlistId) {
