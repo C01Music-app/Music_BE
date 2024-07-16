@@ -22,17 +22,41 @@ public class Artists {
     @Column(columnDefinition = "text")
     private String img;
     private String info;
-    @ManyToMany
-    @JoinTable(
-            name = "artist_songs",
-            joinColumns = @JoinColumn(name = "artist_id"),
-            inverseJoinColumns = @JoinColumn(name = "songs_id")
-    )
-    private Set<Songs> songs;
 
 //    @ManyToOne
 //    @JoinColumn(name = "album_id", referencedColumnName = "id")
 //    private Album album;
 
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
 }
