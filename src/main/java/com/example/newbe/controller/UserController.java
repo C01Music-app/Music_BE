@@ -52,4 +52,14 @@ public class UserController {
         }
         return new ResponseEntity<>("ok",HttpStatus.OK);
     }
+    @PutMapping("/detail/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody User user) {
+        User userDetail = userService.updateUserName(id,user.getUserName(),user.getEmail(), user.getPhone());
+        return new ResponseEntity<>(userDetail, HttpStatus.OK);
+    }
+    @PutMapping("/password/{id}")
+    public ResponseEntity<?> updateUserPassword(@PathVariable Integer id, @RequestBody User user) {
+        User user1 = userService.updatePassword(id, user.getPassword());
+        return new ResponseEntity<>(user1, HttpStatus.OK);
+    }
 }
