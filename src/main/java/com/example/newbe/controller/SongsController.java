@@ -30,8 +30,6 @@ public class SongsController {
 //    }
 
 
-
-
     @GetMapping("")
     public ResponseEntity<?> AllSongs() {
         List<Artists> artists = artistsService.getAllArtists();
@@ -75,4 +73,11 @@ public class SongsController {
         return new ResponseEntity<>(songsList, HttpStatus.OK);
     }
 
+
+    @PutMapping("update/{id}")
+    public ResponseEntity<?> updateSong(@PathVariable Integer id,@RequestBody Songs songs) {
+//        Songs songs = iSongsService.findById(id);
+        iSongsService.updateS(songs);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }

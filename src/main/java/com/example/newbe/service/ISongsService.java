@@ -23,4 +23,6 @@ public interface ISongsService {
 
     List<Songs> findAll();
 
+    void updateS(Songs songs);
+
 }
