@@ -77,30 +77,6 @@ public class SongsController {
         return new ResponseEntity<>(songsList, HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateSongs(@PathVariable Integer id, @RequestBody Songs updatedSongs) {
-        Songs existingSongs = iSongsService.findById(id);
-
-        if (existingSongs == null) {
-            return new ResponseEntity<>("Song not found with id: " + id, HttpStatus.NOT_FOUND);
-        }
-        // Update fields from updatedSongs to existingSongs
-        existingSongs.setTitle(updatedSongs.getTitle());
-        existingSongs.setArtist(updatedSongs.getArtist());
-        existingSongs.setDescription(updatedSongs.getDescription());
-        existingSongs.setTime(updatedSongs.getTime());
-        existingSongs.setDateStart(updatedSongs.getDateStart());
-        existingSongs.setLyrics(updatedSongs.getLyrics());
-        existingSongs.setListens(updatedSongs.getListens());
-        existingSongs.setLikes(updatedSongs.getLikes());
-        existingSongs.setLableSong(updatedSongs.getLableSong());
-        existingSongs.setPlaylists(updatedSongs.getPlaylists());
-
-        // Save the updated song
-        iSongsService.save(existingSongs);
-
-        return new ResponseEntity<>(existingSongs, HttpStatus.OK);
-    }
 
     @DeleteMapping("/{songId}/playlists/{playlistId}")
     public ResponseEntity<?> removePlaylistFromSong(@PathVariable Integer songId, @PathVariable Integer playlistId) {
