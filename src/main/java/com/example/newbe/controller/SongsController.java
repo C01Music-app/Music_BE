@@ -13,13 +13,15 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-
 @RequestMapping("/songs")
 public class SongsController {
     @Autowired
     private ISongsService iSongsService;
     @Autowired
     private IArtistsService artistsService;
+
+
+
 
 //    @GetMapping("")
 //    public ResponseEntity<?> showSongs(@RequestParam(defaultValue = "0") int page,
@@ -60,7 +62,7 @@ public class SongsController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("detail/{id}")
+    @GetMapping("/detail/{id}")
     public ResponseEntity<?> detailSongs(@PathVariable Integer id) {
         Songs songs = iSongsService.findById(id);
         iSongsService.detail(songs);
@@ -74,10 +76,21 @@ public class SongsController {
     }
 
 
+
     @PutMapping("update/{id}")
     public ResponseEntity<?> updateSong(@PathVariable Integer id,@RequestBody Songs songs) {
 //        Songs songs = iSongsService.findById(id);
         iSongsService.updateS(songs);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{songId}/playlists/{playlistId}")
+    public ResponseEntity<?> removePlaylistFromSong(@PathVariable Integer songId, @PathVariable Integer playlistId) {
+        try {
+            iSongsService.removePlaylistFromSong(songId, playlistId);
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
+        }
     }
 }
