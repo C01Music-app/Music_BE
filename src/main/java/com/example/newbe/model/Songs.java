@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,12 +32,14 @@ public class Songs {
     @Column(columnDefinition = "text")
     private String lyrics;
 
+
     private Integer listens;
-    private Integer likes;
+
     private String lableSong;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Playlists> playlists;
+
 
     public Integer getId() {
         return id;
@@ -111,13 +114,7 @@ public class Songs {
         this.listens = listens;
     }
 
-    public Integer getLikes() {
-        return likes;
-    }
 
-    public void setLikes(Integer likes) {
-        this.likes = likes;
-    }
 
     public String getLableSong() {
         return lableSong;
