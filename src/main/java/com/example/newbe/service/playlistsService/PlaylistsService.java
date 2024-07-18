@@ -45,5 +45,15 @@ public class PlaylistsService implements IPlaylistsService {
         return playlistsRepository.findByTitleContainingIgnoreCase(name);
     }
 
+    @Override
+    public Optional<Playlists> findById(Integer playlistId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Playlists> getPlaylistById1(Integer playlistId) {
+        return playlistsRepository.findById(playlistId);
+    }
+
 
 }

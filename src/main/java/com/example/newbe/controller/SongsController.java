@@ -1,16 +1,23 @@
 package com.example.newbe.controller;
 
 import com.example.newbe.model.Artists;
+import com.example.newbe.model.Playlists;
 import com.example.newbe.model.Songs;
+import com.example.newbe.repository.playlistsRepository.IPlaylistsRepository;
 import com.example.newbe.service.ISongsService;
 import com.example.newbe.service.aristsService.IArtistsService;
+import com.example.newbe.service.playlistsService.IPlaylistsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -20,6 +27,8 @@ public class SongsController {
     private ISongsService iSongsService;
     @Autowired
     private IArtistsService artistsService;
+    @Autowired
+    private IPlaylistsService playlistsService;
 
 
 
@@ -77,8 +86,6 @@ public class SongsController {
         return new ResponseEntity<>(songsList, HttpStatus.OK);
     }
 
-
-
     @PutMapping("update/{id}")
     public ResponseEntity<?> updateSong(@PathVariable Integer id,@RequestBody Songs songs) {
 //     Songs songs = iSongsService.findById(id);
@@ -95,4 +102,14 @@ public class SongsController {
             return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
     }
+    @PatchMapping("/{songId}/add-to-playlist/{playlistId}")
+    public ResponseEntity<?> addToPlaylist(@PathVariable Integer songId, @PathVariable Integer playlistId) {
+        try {
+            iSongsService.addPlaylistToSong(songId, playlistId);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
+        }
+    }
+
 }

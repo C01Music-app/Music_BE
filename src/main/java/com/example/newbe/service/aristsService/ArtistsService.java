@@ -1,5 +1,6 @@
 package com.example.newbe.service.aristsService;
 
+import com.example.newbe.model.Album;
 import com.example.newbe.model.Artists;
 import com.example.newbe.repository.artistsRepository.IArtistsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,19 @@ public class ArtistsService implements IArtistsService {
     public List<Artists> findArtistsByName(String name) {
         return artistsRepository.findByNameContainingIgnoreCase(name);
     }
+
+
+    @Override
+    public Artists updateArtist(Integer id, Artists updatedArtist) {
+        Artists existingArtist = artistsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid artist ID"));
+
+        // Update fields of existingArtist with data from updatedArtist
+        existingArtist.setName(updatedArtist.getName());
+        existingArtist.setImg(updatedArtist.getImg());
+        existingArtist.setInfo(updatedArtist.getInfo());
+
+        return artistsRepository.save(existingArtist);
+    }
+
 }
