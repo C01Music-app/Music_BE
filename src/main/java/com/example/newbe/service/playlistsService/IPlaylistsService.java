@@ -14,7 +14,7 @@ public interface IPlaylistsService {
 
     Playlists savePlaylist(Playlists playlist);
 
-    Optional<Playlists> getPlaylistById(Integer id);
+    Playlists getPlaylistById(Integer id);
 
     void deletePlaylist(Integer id);
 

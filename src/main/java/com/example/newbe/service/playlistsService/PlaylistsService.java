@@ -27,7 +27,7 @@ public class PlaylistsService implements IPlaylistsService {
     }
 
     @Override
-    public Optional<Playlists> getPlaylistById(Integer id) {
+    public Playlists getPlaylistById(Integer id) {
         return playlistsRepository.findById(id);
     }
 

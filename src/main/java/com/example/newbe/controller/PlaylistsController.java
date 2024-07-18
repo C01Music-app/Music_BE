@@ -1,6 +1,9 @@
 package com.example.newbe.controller;
 
+import com.example.newbe.model.Comment;
+import com.example.newbe.model.Likes;
 import com.example.newbe.model.Playlists;
+import com.example.newbe.service.likeService.ILikeService;
 import com.example.newbe.service.playlistsService.IPlaylistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,10 @@ public class PlaylistsController {
 
     @Autowired
     private IPlaylistsService playlistsService;
+    @Autowired
+    private ILikeService likeService;
+
+
 
     // Hiển thị tất cả danh sách phát
     @GetMapping("")
@@ -77,4 +84,10 @@ public class PlaylistsController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @PostMapping("/{id}/like")
+    public ResponseEntity<Likes> likePlaylist(@PathVariable Integer id, @RequestBody Likes like) {
+        return ResponseEntity.ok(playlistsService.likePlaylist(id, like));
+    }
+
+
 }

@@ -10,7 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ILikeRepository extends JpaRepository<Likes, Integer> {
-    Optional<Likes> findByPlaylistAndUser(Optional<Playlists> playlist, User user);
 
-    void delete(Optional<Likes> like);
 }

@@ -13,15 +13,15 @@ public class LikeController {
     @Autowired
     private ILikeService likeService;
 
-    @PostMapping("/{playlistId}/like")
-    public ResponseEntity<Likes> likePlaylist(@PathVariable Integer playlistId, @RequestHeader("userId") Integer userId) {
-        Likes like = likeService.likePlaylist(playlistId, userId);
-        return ResponseEntity.ok(like);
-    }
-
-    @DeleteMapping("/{playlistId}/unlike")
-    public ResponseEntity<Void> unlikePlaylist(@PathVariable Integer playlistId, @RequestHeader("userId") Integer userId) {
-        likeService.unlikePlaylist(playlistId, userId);
-        return ResponseEntity.noContent().build();
-    }
+//    @PostMapping("/{playlistId}/like")
+//    public ResponseEntity<Likes> likePlaylist(@PathVariable Integer playlistId, @RequestHeader("userId") Integer userId) {
+//        Likes like = likeService.likePlaylist(playlistId, userId);
+//        return ResponseEntity.ok(like);
+//    }
+//
+//    @DeleteMapping("/{playlistId}/unlike")
+//    public ResponseEntity<Void> unlikePlaylist(@PathVariable Integer playlistId, @RequestHeader("userId") Integer userId) {
+//        likeService.unlikePlaylist(playlistId, userId);
+//        return ResponseEntity.noContent().build();
+//    }
 }
