@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +54,7 @@ public class SongsController {
     @PostMapping("/create")
     public ResponseEntity<?> createSongs(@RequestBody Songs songs) {
         System.out.println(songs);
+        songs.setDateStart(LocalDate.now());
         iSongsService.save(songs);
         System.out.println("ok");
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -86,7 +88,7 @@ public class SongsController {
 
     @PutMapping("update/{id}")
     public ResponseEntity<?> updateSong(@PathVariable Integer id,@RequestBody Songs songs) {
-//        Songs songs = iSongsService.findById(id);
+//     Songs songs = iSongsService.findById(id);
         iSongsService.updateS(songs);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
