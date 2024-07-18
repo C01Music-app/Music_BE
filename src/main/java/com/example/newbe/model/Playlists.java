@@ -24,6 +24,14 @@ public class Playlists {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Likes> likes;
+
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments;
+
+
     public Integer getId() {
         return id;
     }
