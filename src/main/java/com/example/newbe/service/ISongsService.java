@@ -23,6 +23,10 @@ public interface ISongsService {
 
     List<Songs> findAll();
 
+
+    void updateS(Songs songs);
+
     void removePlaylistFromSong(Integer songId, Integer playlistId);
 
+    void addPlaylistToSong(Integer songId, Integer playlistId) throws Exception;
 }
