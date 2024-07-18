@@ -1,5 +1,6 @@
 package com.example.newbe.service.playlistsService;
 
+import com.example.newbe.model.Likes;
 import com.example.newbe.model.Playlists;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +18,12 @@ public interface IPlaylistsService {
 
     void deletePlaylist(Integer id);
 
-
-//    Page<Playlists> findPlaylistsByTitle(Pageable pageable, String name);
-
     List<Playlists> findPlayListByName(String name);
 
     Optional<Playlists> findById(Integer playlistId);
 
     Optional<Playlists> getPlaylistById1(Integer playlistId);
+
+    Likes likePlaylist(Integer id, Likes like);
+
 }

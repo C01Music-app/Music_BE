@@ -3,7 +3,7 @@ package com.example.newbe.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -29,6 +29,35 @@ public class Likes {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public Songs getSong() {
+        return song;
+    }
+
+    public void setSong(Songs song) {
+        this.song = song;
+    }
+
+    public Playlists getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(Playlists playlist) {
+        this.playlist = playlist;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

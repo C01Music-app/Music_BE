@@ -1,6 +1,7 @@
 package com.example.newbe.service.playlistsService;
 
 
+import com.example.newbe.model.Likes;
 import com.example.newbe.model.Playlists;
 import com.example.newbe.repository.playlistsRepository.IPlaylistsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,8 @@ public class PlaylistsService implements IPlaylistsService {
         return playlistsRepository.findById(playlistId);
     }
 
-
+    @Override
+    public Likes likePlaylist(Integer id, Likes like) {
+        return null;
+    }
 }
