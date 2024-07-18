@@ -79,4 +79,17 @@ public class SongsService implements ISongsService {
             throw new RuntimeException("Song or Playlist not found");
         }
     }
+
+    public void addPlaylistToSong(Integer songId, Integer playlistId) throws Exception {
+        Songs song = iSongsRepository.findById(songId)
+                .orElseThrow(() -> new Exception("Song not found"));
+
+        Playlists playlist = iPlaylistsRepository.findById(playlistId)
+                .orElseThrow(() -> new Exception("Playlist not found"));
+
+        song.getPlaylists().add(playlist);
+
+        iSongsRepository.save(song);
+    }
+
 }

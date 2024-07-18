@@ -28,5 +28,5 @@ public interface ISongsService {
 
     void removePlaylistFromSong(Integer songId, Integer playlistId);
 
-
+    void addPlaylistToSong(Integer songId, Integer playlistId) throws Exception;
 }
