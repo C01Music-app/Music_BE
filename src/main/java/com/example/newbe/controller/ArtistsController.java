@@ -1,6 +1,7 @@
 package com.example.newbe.controller;
 
 
+import com.example.newbe.model.Album;
 import com.example.newbe.model.Artists;
 import com.example.newbe.service.aristsService.IArtistsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,10 @@ public class ArtistsController {
     public ResponseEntity<List<Artists>> searchArtistsByName(@RequestParam String name) {
         List<Artists> artists = artistsService.findArtistsByName(name);
         return new ResponseEntity<>(artists, HttpStatus.OK);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Artists> updateArtist(@PathVariable Integer id, @RequestBody Artists artist) {
+        Artists updatedArtist = artistsService.updateArtist(id, artist);
+        return new ResponseEntity<>(updatedArtist, HttpStatus.OK);
     }
 }

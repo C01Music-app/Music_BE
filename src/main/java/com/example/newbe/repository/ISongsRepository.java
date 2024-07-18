@@ -17,7 +17,7 @@ public interface ISongsRepository extends JpaRepository<Songs, Integer> {
 
     List<Songs> findByTitleContainingIgnoreCase(String name);
 
-    @Query(value = " SELECT * FROM songs ORDER BY date_start DESC",
+    @Query(value = " SELECT * FROM songs ORDER BY date_start DESC LIMIT 8",
             nativeQuery = true)
     List<Songs> findAllSongs();
 

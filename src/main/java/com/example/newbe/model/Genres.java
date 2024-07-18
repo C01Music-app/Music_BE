@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Genres {
+public class   Genres {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //Thể Loại

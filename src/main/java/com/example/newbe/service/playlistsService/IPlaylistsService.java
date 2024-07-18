@@ -21,4 +21,8 @@ public interface IPlaylistsService {
 //    Page<Playlists> findPlaylistsByTitle(Pageable pageable, String name);
 
     List<Playlists> findPlayListByName(String name);
+
+    Optional<Playlists> findById(Integer playlistId);
+
+    Optional<Playlists> getPlaylistById1(Integer playlistId);
 }
