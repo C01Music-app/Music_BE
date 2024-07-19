@@ -1,9 +1,11 @@
 package com.example.newbe.controller;
 
 import com.example.newbe.model.Artists;
+import com.example.newbe.model.Comment;
 import com.example.newbe.model.Playlists;
 import com.example.newbe.model.Songs;
 import com.example.newbe.repository.playlistsRepository.IPlaylistsRepository;
+import com.example.newbe.service.ICommentService;
 import com.example.newbe.service.ISongsService;
 import com.example.newbe.service.aristsService.IArtistsService;
 import com.example.newbe.service.playlistsService.IPlaylistsService;
@@ -29,6 +31,8 @@ public class SongsController {
     private IArtistsService artistsService;
     @Autowired
     private IPlaylistsService playlistsService;
+    @Autowired
+    private ICommentService iCommentService;
 
 
 
@@ -111,5 +115,29 @@ public class SongsController {
             return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
     }
+    @GetMapping("/{id}/comments")
+    public ResponseEntity<?> getAllCommentsBySongId(@PathVariable Integer id) {
+        Songs song = iSongsService.findById(id);
+        if (song == null) {
+            return new ResponseEntity<>("Song not found", HttpStatus.NOT_FOUND);
+        }
+        List<Comment> comments = iCommentService.findAllBySongId(id);
+        return new ResponseEntity<>(comments, HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/create/comments")
+    public ResponseEntity<?> createComment(@PathVariable Integer id, @RequestBody Comment comment) {
+        Songs songs = iSongsService.findById(id);
+        if (songs == null) {
+            return new ResponseEntity<>("Song not found", HttpStatus.NOT_FOUND);
+        }
+        comment.setSong(songs);
+        comment.setTimestamp(LocalDate.now());
+        iCommentService.save(comment);
+        return new ResponseEntity<>(comment, HttpStatus.CREATED);
+    }
+
+
+
 
 }
