@@ -1,6 +1,7 @@
 package com.example.newbe.service.playlistsService;
 
 
+import com.example.newbe.model.Comment;
 import com.example.newbe.model.Likes;
 import com.example.newbe.model.Playlists;
 import com.example.newbe.repository.playlistsRepository.IPlaylistsRepository;
@@ -27,7 +28,7 @@ public class PlaylistsService implements IPlaylistsService {
     }
 
     @Override
-    public Playlists getPlaylistById(Integer id) {
+    public Optional<Playlists> getPlaylistById(Integer id) {
         return playlistsRepository.findById(id);
     }
 
@@ -60,4 +61,16 @@ public class PlaylistsService implements IPlaylistsService {
     public Likes likePlaylist(Integer id, Likes like) {
         return null;
     }
+
+    @Override
+    public void unlikePlaylist(Integer id, Likes like) {
+
+    }
+
+    @Override
+    public Comment commentOnPlaylist(Integer id, Comment comment) {
+        return null;
+    }
+
+
 }

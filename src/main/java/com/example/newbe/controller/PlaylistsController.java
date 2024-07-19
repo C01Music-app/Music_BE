@@ -3,7 +3,6 @@ package com.example.newbe.controller;
 import com.example.newbe.model.Comment;
 import com.example.newbe.model.Likes;
 import com.example.newbe.model.Playlists;
-import com.example.newbe.service.likeService.ILikeService;
 import com.example.newbe.service.playlistsService.IPlaylistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,10 +19,6 @@ public class PlaylistsController {
 
     @Autowired
     private IPlaylistsService playlistsService;
-    @Autowired
-    private ILikeService likeService;
-
-
 
     // Hiển thị tất cả danh sách phát
     @GetMapping("")
@@ -89,5 +84,15 @@ public class PlaylistsController {
         return ResponseEntity.ok(playlistsService.likePlaylist(id, like));
     }
 
+    @DeleteMapping("/{id}/like")
+    public ResponseEntity<Void> unlikePlaylist(@PathVariable Integer id, @RequestBody Likes like) {
+        playlistsService.unlikePlaylist(id, like);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/comment")
+    public ResponseEntity<Comment> commentOnPlaylist(@PathVariable Integer id, @RequestBody Comment comment) {
+        return ResponseEntity.ok(playlistsService.commentOnPlaylist(id, comment));
+    }
 
 }

@@ -3,7 +3,7 @@ package com.example.newbe.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Optional;
+import java.util.Set;
 
 @Entity
 @Getter
