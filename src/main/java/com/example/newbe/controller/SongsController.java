@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 
 
@@ -33,8 +34,6 @@ public class SongsController {
     private IPlaylistsService playlistsService;
     @Autowired
     private ICommentService iCommentService;
-
-
 
 
 //    @GetMapping("")
@@ -91,7 +90,7 @@ public class SongsController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<?> updateSong(@PathVariable Integer id,@RequestBody Songs songs) {
+    public ResponseEntity<?> updateSong(@PathVariable Integer id, @RequestBody Songs songs) {
 //     Songs songs = iSongsService.findById(id);
         iSongsService.updateS(songs);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -106,6 +105,7 @@ public class SongsController {
             return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
     }
+
     @PatchMapping("/{songId}/add-to-playlist/{playlistId}")
     public ResponseEntity<?> addToPlaylist(@PathVariable Integer songId, @PathVariable Integer playlistId) {
         try {
@@ -115,6 +115,7 @@ public class SongsController {
             return ResponseEntity.status(500).body("An error occurred: " + e.getMessage());
         }
     }
+
     @GetMapping("/{id}/comments")
     public ResponseEntity<?> getAllCommentsBySongId(@PathVariable Integer id) {
         Songs song = iSongsService.findById(id);
@@ -137,7 +138,11 @@ public class SongsController {
         return new ResponseEntity<>(comment, HttpStatus.CREATED);
     }
 
-
+    @DeleteMapping("/{id}/delete/comments/{commentId}")
+    public ResponseEntity<?> deleteComments(@PathVariable Integer id, @PathVariable Integer commentId) {
+        iSongsService.deleteComment(id, commentId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }
