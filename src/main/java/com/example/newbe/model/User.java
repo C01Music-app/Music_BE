@@ -31,6 +31,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Playlists> playlists;
 
+
+
     public Integer getId() {
         return id;
     }

@@ -1,15 +1,10 @@
 package com.example.newbe.service.LikeService;
 
-import com.example.newbe.model.Likes;
-import org.springframework.stereotype.Service;
-
-@Service
 public interface ILikesService  {
-    Likes likeSong(Likes like);
 
-    void unlikeSong(Integer userId, Integer songId);
+    void likeItem(String itemType, Integer itemId, Integer userId);
 
-    Likes likePlaylist(Likes like);
+    void unlikeItem(String itemType, Integer itemId, Integer userId);
 
-    void unlikePlaylist(Integer userId, Integer playlistId);
+    boolean checkIfLiked(Integer userId, Integer itemId, String itemType);
 }
