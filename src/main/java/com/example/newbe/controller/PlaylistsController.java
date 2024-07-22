@@ -1,5 +1,7 @@
 package com.example.newbe.controller;
 
+import com.example.newbe.model.Comment;
+import com.example.newbe.model.Likes;
 import com.example.newbe.model.Playlists;
 import com.example.newbe.service.playlistsService.IPlaylistsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,4 +79,20 @@ public class PlaylistsController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @PostMapping("/{id}/like")
+    public ResponseEntity<Likes> likePlaylist(@PathVariable Integer id, @RequestBody Likes like) {
+        return ResponseEntity.ok(playlistsService.likePlaylist(id, like));
+    }
+
+    @DeleteMapping("/{id}/like")
+    public ResponseEntity<Void> unlikePlaylist(@PathVariable Integer id, @RequestBody Likes like) {
+        playlistsService.unlikePlaylist(id, like);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/comment")
+    public ResponseEntity<Comment> commentOnPlaylist(@PathVariable Integer id, @RequestBody Comment comment) {
+        return ResponseEntity.ok(playlistsService.commentOnPlaylist(id, comment));
+    }
+
 }
