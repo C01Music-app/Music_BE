@@ -28,7 +28,6 @@ public class UserSer  implements IUserService{
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-
     }
 
     @Override
@@ -39,5 +38,21 @@ public class UserSer  implements IUserService{
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUserName(username);
+    }
+
+    @Override
+    public User updateUserName(Integer id, String userName, String email, String phone) {
+        User user = userRepository.findById(id).orElse(null);
+        user.setUserName(userName);
+        user.setEmail(email);
+        user.setPhone(phone);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updatePassword(Integer id, String password) {
+        User user = userRepository.findById(id).orElse(null);
+        user.setPassword(password);
+        return userRepository.save(user);
     }
 }

@@ -10,4 +10,7 @@ public interface IUserService {
     void save(User user);
     void deleteById(Integer id);
     User findByUsername(String username);
+    User updateUserName(Integer id, String username, String email, String phone);
+    User updatePassword(Integer id, String password);
+
 }
