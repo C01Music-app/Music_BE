@@ -2,6 +2,7 @@ package com.example.newbe.service;
 
 import com.example.newbe.model.Playlists;
 import com.example.newbe.model.Songs;
+import com.example.newbe.repository.ICommentRepository;
 import com.example.newbe.repository.ISongsRepository;
 import com.example.newbe.repository.playlistsRepository.IPlaylistsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class SongsService implements ISongsService {
 
     @Autowired
     private IPlaylistsRepository iPlaylistsRepository ;  // Add this line
+
+    @Autowired
+    private ICommentRepository iCommentRepository;
 
     @Override
     public Page<Songs> getAllPage(Pageable pageable, String name) {
@@ -90,6 +94,11 @@ public class SongsService implements ISongsService {
         song.getPlaylists().add(playlist);
 
         iSongsRepository.save(song);
+    }
+
+    @Override
+    public void deleteComment(Integer id, Integer commentId) {
+        iCommentRepository.deleteById(commentId);
     }
 
 }
